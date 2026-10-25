@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Customisations for our private v83 server, built on [Cosmic](https://github.com/P0nk/Cosmic). The live server runs on the host's (Will's) Raspberry Pi; player setup and host notes are in the [Private_Maple](https://github.com/stunglebungus/Private_Maple) repo.
+Customisations for our private v83 server, built on [Cosmic](https://github.com/P0nk/Cosmic). The live server runs on the host's (Will's) Raspberry Pi; player setup and host notes are in `../Private_Maple`, and `../AGENTS.md` describes the whole workspace.
 
 ## Remotes and branches
 - `origin` is TommyTealu/Cosmic, a personal staging fork. `upstream` is P0nk/Cosmic.
@@ -14,7 +14,7 @@ Customisations for our private v83 server, built on [Cosmic](https://github.com/
 - The DB schema is created and migrated by Liquibase on startup (`src/main/resources/db/`). Schema changes go in as new changesets there, never as hand-run SQL.
 - Make a local GM: `docker compose exec db mysql cosmic -e "update characters set gm = 6 where name = 'Name';"`, then relog.
 - Logs: `docker compose logs -f maplestory`.
-- Client: `C:\Nexon\MapleStory\Maple-Local.exe` (desktop shortcut "Maple Local Test"), installed by `setup-local-client.ps1` in Private_Maple. It only connects to 127.0.0.1.
+- Client: `C:\Nexon\MapleStory\Maple-Local.exe` (desktop shortcut "Maple Local Test"), installed by `../Private_Maple/setup-local-client.ps1`. It only connects to 127.0.0.1.
 
 ## Making changes
 - Prefer NPC scripts (`scripts/npc/<npcId>.js`) over Java. Reuse an existing NPC id and sprite; place it permanently in game with `!pnpc <npcId>` (GM level 4+).
