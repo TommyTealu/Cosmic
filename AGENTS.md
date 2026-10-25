@@ -10,10 +10,10 @@ Customisations for our private v83 server, built on [Cosmic](https://github.com/
 
 ## Local test server
 - `docker compose up -d --build` starts the server and a MySQL 8.4 DB. Needs Docker Desktop running. Rebuild after Java changes; scripts, `wz/` and `config.yaml` are mounted, so those only need `docker compose restart maplestory`.
-- `docker-compose.override.yml` is local-only (in `.git/info/exclude`) and binds every port to 127.0.0.1, because the DB root password is empty. Don't commit it or remove it.
+- `docker-compose.override.yml` is local-only (in `.git/info/exclude`) and binds every port to 127.0.0.1, because the DB root password is empty, and mounts `./logs`. Don't commit it or remove it.
 - The DB schema is created and migrated by Liquibase on startup (`src/main/resources/db/`). Schema changes go in as new changesets there, never as hand-run SQL.
 - Make a local GM: `docker compose exec db mysql cosmic -e "update characters set gm = 6 where name = 'Name';"`, then relog.
-- Logs: `docker compose logs -f maplestory`.
+- Logs: `logs/cosmic-log.log` (plus `chat.log`, `trades.log` and others), kept across restarts by the override's `./logs` mount; live with `docker compose logs -f maplestory`.
 - Client: `C:\Nexon\MapleStory\Maple-Local.exe` (desktop shortcut "Maple Local Test"), installed by `../Private_Maple/setup-local-client.ps1`. It only connects to 127.0.0.1.
 
 ## Making changes
